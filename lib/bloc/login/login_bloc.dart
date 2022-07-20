@@ -18,6 +18,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    passwordController.dispose();
+    return super.close();
+  }
+
   _loginNowHandler(LoginNow event, Emitter emit) async {
     final store = await openStore();
     emit(LoginLoading());
@@ -29,12 +36,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else {
       emit(LoginError());
     }
-  }
-
-  @override
-  Future<void> close() {
-    emailController.dispose();
-    passwordController.dispose();
-    return super.close();
   }
 }
