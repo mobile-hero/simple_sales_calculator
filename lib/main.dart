@@ -1,7 +1,30 @@
-import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_sales_calculator/data/app_provider.dart';
+import 'package:simple_sales_calculator/data/repository/user_local_repository_impl.dart';
+import 'package:simple_sales_calculator/res/resources.dart';
+
+import 'ui/login/login_screen.dart';
+import 'ui/main/main_screen.dart';
+import 'ui/registration/registration_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppConfiguration());
+}
+
+class AppConfiguration extends StatelessWidget {
+  const AppConfiguration({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider<AppProvider>(
+      create: (context) {
+        return AppProvider(
+          userLocalRepository: UserLocalRepositoryImpl(),
+        );
+      },
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -11,20 +34,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sales Calculator',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        textTheme: customTextTheme,
+        primarySwatch: Colors.deepPurple,
+        primaryColor: egyptian,
+        backgroundColor: backgroundColor,
+        scaffoldBackgroundColor: white,
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: egyptian,
+        ),
+        splashColor: waterfall,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: <String, WidgetBuilder>{
+        // '/splash': (context) => SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegistrationScreen(),
+        '/main': (context) => const MainScreen(),
+      },
+      initialRoute: "/login",
     );
   }
 }
