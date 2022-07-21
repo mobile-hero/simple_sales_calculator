@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         primaryColor: egyptian,
         backgroundColor: backgroundColor,
         scaffoldBackgroundColor: white,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         appBarTheme: const AppBarTheme(
           backgroundColor: egyptian,
         ),
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         // '/splash': (context) => SplashScreen(),
         '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegistrationScreen(),
+        '/register': (context) => RegistrationScreen(),
         '/main': (context) => const MainScreen(),
       },
       initialRoute: "/login",

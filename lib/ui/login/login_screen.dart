@@ -26,13 +26,24 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(space4x),
               child: Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: space6x),
+                      child: Text(
+                        'Sales Calculator',
+                        style: context.styleHeadline1.bold,
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: space2x),
                       child: TextField(
                         controller: TextEditingController(),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Email',
+                          hintStyle: context.styleBody1.copyWith(
+                            color: grease.withOpacity(0.3),
+                          ),
                         ),
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -41,31 +52,45 @@ class LoginScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: space2x),
                       child: TextField(
                         controller: TextEditingController(),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Password',
+                          hintStyle: context.styleBody1.copyWith(
+                            color: grease.withOpacity(0.3),
+                          ),
                         ),
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         obscuringCharacter: '#',
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Login'),
+                    const SizedBox(height: space4x),
+                    SizedBox(
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Login'),
+                      ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Don\'t have account?',
-                        children: [
-                          WidgetSpan(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/register');
-                              },
-                              child: const Text('Register here'),
-                            ),
-                          )
-                        ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: space8x),
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Don\'t have account? ',
+                          style: context.styleBody2,
+                          children: [
+                            WidgetSpan(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/register');
+                                },
+                                child: Text(
+                                  'Register here',
+                                  style: context.styleBody2.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],

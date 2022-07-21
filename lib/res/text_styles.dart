@@ -5,7 +5,7 @@ import 'dimens.dart';
 
 const TextTheme customTextTheme = TextTheme(
   headline1: TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     fontSize: textSizeHeadline1,
     inherit: true,
     color: grease,
@@ -19,14 +19,14 @@ const TextTheme customTextTheme = TextTheme(
     color: grease,
   ),
   headline4: TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     fontSize: textSizeHeadline4,
     inherit: true,
     color: grease,
     height: 1.208,
   ),
   headline5: TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     fontSize: textSizeHeadline5,
     inherit: true,
     color: grease,
@@ -47,7 +47,7 @@ const TextTheme customTextTheme = TextTheme(
     height: 1.571,
   ),
   bodyText2: TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     fontSize: textSizeBody2,
     inherit: true,
     color: grease,
@@ -60,7 +60,7 @@ const TextTheme customTextTheme = TextTheme(
     height: 1.125,
   ),
   subtitle2: TextStyle(
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.normal,
     fontSize: textSizeSubtitle2,
     inherit: true,
     color: grease,
