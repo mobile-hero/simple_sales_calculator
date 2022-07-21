@@ -28,7 +28,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   _loginNowHandler(LoginNow event, Emitter emit) async {
     final store = await openStore();
     emit(LoginLoading());
-
+    print(event);
+    print(emailController.text);
+    print(passwordController.text);
     final user = userLocalRepository.getUser(
         store, emailController.text, passwordController.text);
     if (user != null) {
@@ -36,5 +38,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else {
       emit(LoginError());
     }
+    store.close();
   }
 }

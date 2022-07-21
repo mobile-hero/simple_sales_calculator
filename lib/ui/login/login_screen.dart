@@ -2,7 +2,9 @@ import '../../bloc/login/login_bloc.dart';
 import '../../my_material.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+
+  final showPassword = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,8 @@ class LoginScreen extends StatelessWidget {
         body: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/main');
+              return;
             }
             if (state is LoginError) {
               ScaffoldMessenger.of(context).clearSnackBars();
@@ -22,6 +25,7 @@ class LoginScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
+            final bloc = context.read<LoginBloc>();
             return Container(
               padding: const EdgeInsets.all(space4x),
               child: Center(
@@ -38,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: space2x),
                       child: TextField(
-                        controller: TextEditingController(),
+                        controller: bloc.emailController,
                         decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: context.styleBody1.copyWith(
@@ -50,24 +54,38 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: space2x),
-                      child: TextField(
-                        controller: TextEditingController(),
-                        decoration: InputDecoration(
-                          hintText: 'Password',
-                          hintStyle: context.styleBody1.copyWith(
-                            color: grease.withOpacity(0.3),
-                          ),
-                        ),
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: true,
-                        obscuringCharacter: '#',
-                      ),
+                      child: ValueListenableBuilder<bool>(
+                          valueListenable: showPassword,
+                          builder: (context, value, widget) {
+                            return TextField(
+                              controller: bloc.passwordController,
+                              decoration: InputDecoration(
+                                hintText: 'Password',
+                                hintStyle: context.styleBody1.copyWith(
+                                  color: grease.withOpacity(0.3),
+                                ),
+                                suffixIcon: InkWell(
+                                  onTap: () {
+                                    showPassword.value = !value;
+                                  },
+                                  child: Icon(showPassword.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                ),
+                              ),
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: showPassword.value,
+                              obscuringCharacter: '#',
+                            );
+                          }),
                     ),
                     const SizedBox(height: space4x),
                     SizedBox(
                       width: 200,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          bloc.add(LoginNow());
+                        },
                         child: const Text('Login'),
                       ),
                     ),

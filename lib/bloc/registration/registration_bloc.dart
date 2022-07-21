@@ -44,11 +44,13 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         image: null);
     final userId = userLocalRepository.createUser(store, user);
     user.id = userId;
-
+    print(user.toJson());
     if (userId > 0) {
       emit(RegistrationSuccess());
     } else {
       emit(RegistrationError());
     }
+
+    store.close();
   }
 }

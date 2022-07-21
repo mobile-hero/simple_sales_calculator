@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         // '/splash': (context) => SplashScreen(),
-        '/login': (context) => const LoginScreen(),
+        '/login': (context) => LoginScreen(),
         '/register': (context) => RegistrationScreen(),
         '/main': (context) => const MainScreen(),
       },
